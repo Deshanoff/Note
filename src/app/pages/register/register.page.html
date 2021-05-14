@@ -1,9 +1,44 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>register</ion-title>
+
+    <ion-button slot="end" (click)="back()">Login</ion-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
+
+
+    <div class = "emailForm">
+      <h2 class = "ion-text-center header_lbl">Sign Up</h2>
+      <form [formGroup]="registration_form">
+        <ion-item lines="full">
+          <ion-label position="floating">Nick Name</ion-label>
+          <ion-input type="text" formControlName="uname" required></ion-input>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label position="floating">Email</ion-label>
+          <ion-input type="text" formControlName="email" required></ion-input>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label position="floating">Password</ion-label>
+          <ion-input type="text" formControlName="password" type="password" required></ion-input>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label position="floating">Confirm Password</ion-label>
+          <ion-input type="text" formControlName="confpassword" type="password" required></ion-input>
+        </ion-item>
+        <ion-row>
+          <ion-col>
+            <ion-button class="btn_class" [disabled]="!registration_form.valid" color="secondary" type="submit" (click)="signUp(registration_form.value)" expand="block">Registor</ion-button>
+          </ion-col>
+        </ion-row>
+
+      </form>
+    </div>
+
+
+  <div class="emailForm">
+    <p class="subtitle ion-text-center">{{text}}</p>
+  </div>
 
 </ion-content>

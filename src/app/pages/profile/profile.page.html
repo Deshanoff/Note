@@ -1,9 +1,14 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>profile</ion-title>
+    <ion-title *ngFor="let note of (user|async)"><h3>Hi {{note.uname}}</h3></ion-title>
+    <ion-icon name="power-outline" (click)="signout()" slot="end" style="zoom:2.0;"></ion-icon>
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div class="login-logo">
+    <img src="https://cdn4.iconfinder.com/data/icons/e-commerce-181/512/477_profile__avatar__man_-512.png" class="logo_icon">
+  </div>
 
 </ion-content>

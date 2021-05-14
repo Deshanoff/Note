@@ -1,0 +1,41 @@
+.login-logo{
+  text-align: center;
+  margin: auto;
+  right: 0px;
+  left: 0px;
+  margin-top: 30%;
+  margin-bottom: 20%;
+  .login_icon{
+    width: 110px !important;
+  }
+  .login_name{
+    margin: 10px;
+    font-size: 1.7rem;
+
+  }
+}
+.btn_class{
+  color:black;
+  height: 50px;
+  margin-top: 20px;
+  --border-radius:5px;
+  font-weight: 600;
+}
+.login_logo img{
+  max-width: 150px;
+}
+ion-list{
+  -ion-background-color:transparent;
+}
+.createAcc{
+  test-align:center;
+  .registerTag{
+    color:var(--ion-color-secondary);
+    font-weight: bold;
+  }
+}
+.error-message{
+  padding-right: 25px;
+  color:red;
+  text-align: center;
+}

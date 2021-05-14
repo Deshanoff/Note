@@ -1,6 +1,6 @@
 .headbar{
   width: fit-content;
-  padding-left: 10%;
+  padding-left: 1px;
 }
 .postcard-container {
   display: table;
@@ -27,11 +27,12 @@ ion-card{
   background: transparent;
 }
 .postcard {
-  text-align: center;
-  margin:auto;
+  display: table-cell;
+  vertical-align:auto;
+  background-position: center center;
 
 
-  margin-left: 10%;
-  margin-right: 10%;
+  background-repeat: no-repeat;
+
 
 }

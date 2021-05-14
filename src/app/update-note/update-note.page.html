@@ -20,7 +20,7 @@
           </ion-item>
           <div style="height: 20px;"></div>
           <ion-item>
-            <textarea #myInput id="myInput" placeholder="Enter More infrmation" rows="20" maxLength="10000" (keyup)="resize()"[(ngModel)]="note.content" lines="none" ></textarea>
+            <textarea #myInput id="myInput" placeholder="Enter More infrmation" rows="10" maxLength="500" (keyup)="resize()"[(ngModel)]="note.content" lines="none" ></textarea>
 
           </ion-item>
 
@@ -33,7 +33,7 @@
     </div>
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
       <ion-fab-button>
-        <ion-icon name="add-circle-outline" (click)="addNote()"></ion-icon>
+        <ion-icon name="add-circle-outline" (click)="UpdateNote()"></ion-icon>
       </ion-fab-button>
     </ion-fab>
 

@@ -1,9 +1,61 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>my-listings</ion-title>
+    <ion-title>
+      <h2>Past Notes</h2>
+    </ion-title>
+
+    <ion-icon name="power-outline" (click)="signout()" slot="end" style="zoom:2.0;"></ion-icon>
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-</ion-content>
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-item lines="none">
+        <ion-label style="font-weight: 800; font-size:1.5em;">
+          Today
+          <h2>{{today| date:'fullDate'}}</h2>
+        </ion-label>
+
+
+
+
+
+      </ion-item>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content [fullscreen]="true">
+
+    <ion-card *ngFor="let note of (notes|async)"  color="primary">
+      <ion-card-header>
+        <ion-card-subtitle>
+          {{note.createAt|date:'short'}}
+        </ion-card-subtitle>
+        <ion-item lines="none" color="primary">
+          <ion-icon name="clipboard-outline"></ion-icon>
+          <ion-label>{{note.title}}</ion-label>
+        </ion-item>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-button fill="outline" expand="block" [routerLink]="'/view/'+note.id" color="secondary">View</ion-button>
+      </ion-card-content>
+    </ion-card>
+
+
+
+  </ion-content>
+
+
+
+
+
+
+
+
+
+
+
+
+
