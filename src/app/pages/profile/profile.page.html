@@ -7,8 +7,19 @@
 </ion-header>
 
 <ion-content>
-  <div class="login-logo">
-    <img src="https://cdn4.iconfinder.com/data/icons/e-commerce-181/512/477_profile__avatar__man_-512.png" class="logo_icon">
+  <div class="login-logo" *ngFor="let note of (user|async)">
+    <img src="{{note.imageuri}}" class="logo_icon">
+
+
+<input type="file" (change)="showPreview($event)">
+<button (click)="save()">Save</button>
+  </div>
+  <div>
+
+
+  </div>
+  <div>
+    <h5>{{uploading}}</h5>
   </div>
 
 </ion-content>

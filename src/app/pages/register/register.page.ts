@@ -78,8 +78,9 @@ export class RegisterPage implements OnInit {
       .RegisterUser(value.email, value.password, value.uname)
       .then((res) => {
         GetuidComponent.uid=res.user.uid;
-          this.afs.collection('notes').doc(res.user.uid).collection('user_details').add({
-            uname:value.uname
+          this.afs.collection('notes').doc(GetuidComponent.uid).collection('user_details').add({
+            uname:value.uname,
+
         });
        try {
         this.sendEmailVerification();

@@ -12,6 +12,7 @@ import { NavController } from '@ionic/angular';
 
 
 import { GetuidComponent } from '../model/getuid/getuid.component';
+import { Data } from './file.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -37,6 +38,7 @@ export class FirebbaseService {
           const data=a.payload.doc.data();
           //get key
           const id=a.payload.doc.id;
+          console.log(id);
           //return
           return {id,...data};
         });
@@ -48,6 +50,19 @@ export class FirebbaseService {
 
   }
   ngOnInit() {
+  }
+  addimageData(url:string){
+    this.afs.collection('notes').doc(GetuidComponent.uid).update({
+      url:url
+    })
+  }
+  getimageUri(){
+    return this.afs.collection('notes').doc<Data>(GetuidComponent.uid).valueChanges().pipe(
+      take(1),
+      map(note=>{
+        return note.url;
+      })
+    )
   }
 
 

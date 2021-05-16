@@ -20,7 +20,7 @@ import { Details } from '../model/Details';
 export class UserDetailsService {
   public  static notes : Observable<Details[]>;
   public noteCollection:AngularFirestoreCollection<Details>;
-
+public static docid:string;
   constructor(private afs:AngularFirestore,
 
     private navCtrl: NavController
@@ -39,6 +39,8 @@ export class UserDetailsService {
           const data=a.payload.doc.data();
           //get key
           const id=a.payload.doc.id;
+          UserDetailsService.docid=id;
+          console.log(id);
           //return
           return {id,...data};
         });
@@ -60,6 +62,7 @@ export class UserDetailsService {
           const data=a.payload.doc.data();
           //get key
           const id=a.payload.doc.id;
+          UserDetailsService.docid=id
           //return
           return {id,...data};
         });
