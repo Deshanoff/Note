@@ -9,6 +9,7 @@ import { FirebbaseService } from '../services/firebabse.service';
   styleUrls: ['./view.page.scss'],
 })
 export class ViewPage implements OnInit {
+  //create node Module
   note:Note={
     id:'',
     title:'',
