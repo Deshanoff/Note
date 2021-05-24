@@ -25,7 +25,7 @@ public static docid:string;
 
     private navCtrl: NavController
     ) {
-    //getUid.uid=firebase.auth().currentUser.uid;
+    //getUid.uid=firebase.auth().currentUser.uid; add github
     console.log("addpage " + GetuidComponent.uid);
     //define collection
     //this.noteCollection=this.afs.collection<Note>('notes');
