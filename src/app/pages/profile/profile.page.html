@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title *ngFor="let note of (user|async)"><h3>Hi {{note.uname}}</h3></ion-title>
+    <ion-title *ngFor="let note of (user|async)"><h3>Hi {{note.fname}}</h3></ion-title>
     <ion-icon name="power-outline" (click)="signout()" slot="end" style="zoom:2.0;"></ion-icon>
 
   </ion-toolbar>
@@ -12,10 +12,16 @@
 
 
 <input type="file" (change)="showPreview($event)">
-<button (click)="save()">Save</button>
+<button (click)="save()">Click Me to change profile picture</button>
   </div>
   <div>
+    <ion-list *ngFor="let note of (user|async)">
+      <h5>First Name : {{note.fname}}</h5>
+      <h5>Last Name : {{note.lname}}</h5>
+      <h5>Phone Number : {{note.pnum}}</h5>
 
+    </ion-list>
+<ion-button (click)="gotoEdit()">Update Details</ion-button>
 
   </div>
   <div>

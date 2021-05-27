@@ -13,12 +13,17 @@ import { NavController } from '@ionic/angular';
 
 import { GetuidComponent } from '../model/getuid/getuid.component';
 import { Data } from './file.service';
+import { Details } from '../model/Details';
+import { UserDetailsService } from './user-details.service';
 @Injectable({
   providedIn: 'root'
 })
 export class FirebbaseService {
   public  static notes : Observable<Note[]>;
   public noteCollection:AngularFirestoreCollection<Note>;
+
+  public  static details : Observable<Details[]>;
+  public detailsCollection:AngularFirestoreCollection<Details>;
 
   constructor(private afs:AngularFirestore,
 
@@ -29,7 +34,7 @@ export class FirebbaseService {
     //define collection
     //this.noteCollection=this.afs.collection<Note>('notes');
     this.noteCollection=this.afs.collection('notes').doc(GetuidComponent.uid).collection<Note>('data');
-
+    this.detailsCollection=this.afs.collection('notes').doc(GetuidComponent.uid).collection<Details>('user_details');
     //get collection data
     FirebbaseService.notes=this.noteCollection.snapshotChanges().pipe(
       map(action=>{
@@ -96,6 +101,15 @@ export class FirebbaseService {
         createAt:note.createAt
       }
     );
+  }
+  updateProfile(fname, lname, pnum):Promise<void>{
+    return this.detailsCollection.doc(UserDetailsService.docid).update(
+      {
+        fname:fname,
+        lname:lname,
+        pnum:pnum
+      }
+    )
   }
 
 

@@ -12,7 +12,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize, map, take } from "rxjs/operators";
 import { FileService} from 'src/app/services/file.service'
 import { GetuidComponent } from 'src/app/model/getuid/getuid.component';
-import { ToastController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -24,15 +24,17 @@ export class ProfilePage implements OnInit {
   public user : Observable<Details[]>;
   public notes:Observable<Note[]>;
   public u:string;
-  public  static imgs : Observable<Img[]>;
+
   selectedImage: any = null;
   url:string;
   id:string;
   file:string;
   oc:string;
   uploading:string;
+  imageuri:string;
 
-  public noteCollection:AngularFirestoreCollection<Img>;
+
+
 
   constructor(private auths:AuthenticationService,
     private router:Router,
@@ -42,26 +44,40 @@ export class ProfilePage implements OnInit {
     private ff:FirebbaseService,
 
 private storage: AngularFireStorage,private fileService: FileService,
-public toastCtrl: ToastController
+public toastCtrl: ToastController,
+public loadingController: LoadingController
 
 
     ) {
 
 
       this.udtl.ngOnInit();
-      console.log("lllalad");
+      console.log("profile page constructor");
       this.user=this.udtl.getNotes();
      this.fileService.getImageDetailList();
       this.uploading="";
-
+     this.user.subscribe(x => x.forEach(p=>{
+       this.imageuri=p.imageuri;
+     }))
 
     }
 
 
   ngOnInit() {
     this.udtl.ngOnInit();
-    console.log("lllalad");
+    console.log("profile page on init");
     this.user=this.udtl.getNotes();
+  }
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Please wait...',
+      duration: 6000
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
   }
   showPreview(event: any) {
     this.selectedImage = event.target.files[0];
@@ -79,11 +95,21 @@ public toastCtrl: ToastController
     this.router.navigate(['']);
 
   }
+  delete(downloadUrl) {
+    try{
+      return this.storage.storage.refFromURL(downloadUrl).delete();
+    }catch{
+      console.log("no image");
+    }
+
+  }
   save() {
     var name = this.selectedImage.name;
     console.log(name);
-    this.uploading="uploading your image";
-
+    this.presentLoading();
+    this.uploading="uploading your image please wait";
+    this.delete(this.imageuri)
+    console.log(" old image deleted");
 
     const fileRef = this.storage.ref(name);
     this.storage.upload(name, this.selectedImage).snapshotChanges().pipe(
@@ -107,12 +133,11 @@ public toastCtrl: ToastController
   view(){
     this.fileService.getImage(this.file);
   }
+  gotoEdit(){
+    this.router.navigateByUrl('editpage');
+  }
 }
-export interface Img{
-  id?:string;
-  uname:string;
-  imageuri:string;
-}
+
 function openToast() {
   throw new Error('Function not implemented.');
 }

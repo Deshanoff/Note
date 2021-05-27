@@ -61,6 +61,9 @@ export class UpdateNotePage implements OnInit {
     this.router.navigate(['']);
 
   }
+  back(){
+    this.router.navigate(['tabs/home']);
+  }
 }
 
 

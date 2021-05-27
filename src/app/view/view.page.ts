@@ -9,7 +9,6 @@ import { FirebbaseService } from '../services/firebabse.service';
   styleUrls: ['./view.page.scss'],
 })
 export class ViewPage implements OnInit {
-  //create node Module
   note:Note={
     id:'',
     title:'',
@@ -35,6 +34,9 @@ export class ViewPage implements OnInit {
     this.fbSerice.deleteNote(this.note.id).then(()=>{
       this.router.navigateByUrl('tabs/my-listing');
     })
+  }
+  back(){
+    this.router.navigate(['tabs/home']);
   }
 
 }

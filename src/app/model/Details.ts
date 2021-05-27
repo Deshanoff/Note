@@ -1,5 +1,7 @@
 export interface Details{
   id?:string;
-  uname:string;
+  fname:string;
+  lname:string;
+  pnum:string;
   imageuri:string;
 }

@@ -6,7 +6,10 @@ import { Note } from 'src/app/model/Note';
 import { AuthenticationService } from 'src/app/serices/authentication.service';
 import { AuthenticateService } from 'src/app/services/authentication.service';
 import { FirebbaseService } from 'src/app/services/firebabse.service';
-
+import { first } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { GetuidComponent } from 'src/app/model/getuid/getuid.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 @Component({
   selector: 'app-my-listings',
   templateUrl: './my-listings.page.html',
@@ -16,23 +19,33 @@ export class MyListingsPage implements OnInit {
   public notes:Observable<Note[]>;
   public backupnote:Observable<Note[]>;
   today:number=  Date.now();
+  public time;
+  public noteList: any[];
+  public noteListBackup: any[];
+  filterTerm: string;
 
   constructor(private auths:AuthenticationService,
     private router:Router,
     private ngFireAuth:AngularFireAuth,
     private fbSerice:FirebbaseService,
-              private fbauth:AuthenticateService
+              private fbauth:AuthenticateService,
+              private firestore: AngularFirestore
 
     ) {
+      setInterval(() => {
+        this.time = new Date();
+     }, 1000);
     }
 
-  ngOnInit() {
+    async ngOnInit() {
 
     this.fbSerice.ngOnInit();
+
     this.notes=this.fbSerice.getNotes();
     console.log("my listing loadeed");
 
   }
+
 
   static loadit(){
 
@@ -50,4 +63,5 @@ export class MyListingsPage implements OnInit {
     this.router.navigate(['']);
 
   }
+
 }

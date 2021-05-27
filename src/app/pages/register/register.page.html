@@ -12,12 +12,20 @@
       <h2 class = "ion-text-center header_lbl">Sign Up</h2>
       <form [formGroup]="registration_form">
         <ion-item lines="full">
-          <ion-label position="floating">Nick Name</ion-label>
-          <ion-input type="text" formControlName="uname" required></ion-input>
+          <ion-label position="floating">First Name</ion-label>
+          <ion-input type="text" formControlName="fname" required></ion-input>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label position="floating">Last Name</ion-label>
+          <ion-input type="text" formControlName="lname" required></ion-input>
         </ion-item>
         <ion-item lines="full">
           <ion-label position="floating">Email</ion-label>
           <ion-input type="text" formControlName="email" required></ion-input>
+        </ion-item>
+        <ion-item lines="full">
+          <ion-label position="floating">Mobile Number</ion-label>
+          <ion-input type="text" formControlName="pnum" required></ion-input>
         </ion-item>
         <ion-item lines="full">
           <ion-label position="floating">Password</ion-label>
