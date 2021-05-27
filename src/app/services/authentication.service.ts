@@ -16,7 +16,7 @@ export class AuthenticateService {
     private afAuth: AngularFireAuth,
     private navCtrl: NavController,
     private router : Router
-
+//dsfsdfsdf
 
   ) { }
 

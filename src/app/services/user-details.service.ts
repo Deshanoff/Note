@@ -25,7 +25,7 @@ public static docid:string;
 
     private navCtrl: NavController
     ) {
-    //getUid.uid=firebase.auth().currentUser.uid; add github
+    //getUid.uid=firebase.auth().currentUser.uid;
     console.log("addpage " + GetuidComponent.uid);
     //define collection
     //this.noteCollection=this.afs.collection<Note>('notes');
@@ -87,7 +87,7 @@ public static docid:string;
   updateNote(note : Details):Promise<void>{
     return this.noteCollection.doc(note.id).update(
       {
-        uname:note.uname
+        fname:note.fname
       }
     );
   }

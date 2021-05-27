@@ -39,6 +39,10 @@ const routes: Routes = [
   {
     path: 'update-note/:id',
     loadChildren: () => import('./update-note/update-note.module').then( m => m.UpdateNotePageModule)
+  },
+  {
+    path: 'editpage',
+    loadChildren: () => import('./pages/editpage/editpage.module').then( m => m.EditpagePageModule)
   }
 ];
 @NgModule({

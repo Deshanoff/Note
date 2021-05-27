@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { AuthGuard } from 'src/app/guard/auth.guard';
 import { Note } from 'src/app/model/Note';
 import { AuthenticationService } from 'src/app/serices/authentication.service';
@@ -25,7 +25,8 @@ private auths:AuthenticationService,
 private router:Router,
 private fbSerice:FirebbaseService,
 private ngFireAuth:AngularFireAuth,
-public toastCtrl: ToastController
+public toastCtrl: ToastController,
+public loadingController: LoadingController
 
   ) { }
 
@@ -43,11 +44,22 @@ public toastCtrl: ToastController
     }
     )
 
-
+    this.presentLoading()
     this.note.title="";
     this.note.content="";
     console.log("Add button clicked");
     this.router.navigateByUrl("tabs/my-listing");
+  }
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Please wait...',
+      duration: 2000
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
   }
 
   signout(){

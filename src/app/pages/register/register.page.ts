@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import {
   ActionSheetController,
   IonSlides,
+  LoadingController,
   NavController,
 } from '@ionic/angular';
 import { GetuidComponent } from 'src/app/model/getuid/getuid.component';
@@ -44,7 +45,8 @@ export class RegisterPage implements OnInit {
     public authService: AuthenticationService,
     private formBuilder: FormBuilder,
     private afs:AngularFirestore,
-    private router: Router
+    private router: Router,
+    public loadingController: LoadingController
   ) {
   //   this.hideResend = false;
   //   this.authService.getUser().subscribe((result) => {
@@ -62,9 +64,10 @@ export class RegisterPage implements OnInit {
   }
 
   sendEmailVerification() {
+    this.presentLoading();
     this.authService.getUser().subscribe((user) => {
       user.sendEmailVerification().then((result) => {
-        this.text="we send confiremation code to your email. Confirem Email and Login";
+        this.text="Confirm Email And Login";
       });
     });
   }
@@ -75,11 +78,13 @@ export class RegisterPage implements OnInit {
   }
   signUp(value) {
     this.authService
-      .RegisterUser(value.email, value.password, value.uname)
+      .RegisterUser(value.email, value.password, value.fname, value.lname, value.pnum)
       .then((res) => {
         GetuidComponent.uid=res.user.uid;
           this.afs.collection('notes').doc(GetuidComponent.uid).collection('user_details').add({
-            uname:value.uname,
+            fname:value.fname,
+            lname:value.lname,
+            pnum:value.pnum
 
         });
        try {
@@ -102,6 +107,17 @@ export class RegisterPage implements OnInit {
   }
   back(){
     this.navCtrl.navigateBack("");
+  }
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Please wait...',
+      duration: 2000
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
   }
   ngOnInit() {
 
@@ -151,7 +167,9 @@ export class RegisterPage implements OnInit {
             ),
           ])
         ),
-        uname: new FormControl('', Validators.compose([])),
+        fname: new FormControl('', Validators.compose([])),
+        lname: new FormControl('', Validators.compose([])),
+        pnum: new FormControl('', Validators.compose([])),
         password: new FormControl(
           '',
           Validators.compose([Validators.minLength(5), Validators.required])

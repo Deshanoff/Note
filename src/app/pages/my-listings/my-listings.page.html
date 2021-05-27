@@ -16,8 +16,12 @@
       <ion-item lines="none">
         <ion-label style="font-weight: 800; font-size:1.5em;">
           Today
+          <p class="txt-time" slot="end">{{time | date:'mediumTime'}}</p>
           <h2>{{today| date:'fullDate'}}</h2>
+
+
         </ion-label>
+
 
 
 
@@ -27,13 +31,14 @@
     </ion-toolbar>
   </ion-header>
   <ion-content [fullscreen]="true">
-
-    <ion-card *ngFor="let note of (notes|async)"  color="primary">
+    <ion-searchbar placeholder="Search..." [(ngModel)]="filterTerm" animated="true"></ion-searchbar>
+    <ion-list *ngFor="let note of (notes|async) | filter:filterTerm">
+      <ion-card>
       <ion-card-header>
         <ion-card-subtitle>
-          {{note.createAt|date:'short'}}
+          {{note.createAt|date:'mediumDate'}}
         </ion-card-subtitle>
-        <ion-item lines="none" color="primary">
+        <ion-item lines="none">
           <ion-icon name="clipboard-outline"></ion-icon>
           <ion-label>{{note.title}}</ion-label>
         </ion-item>
@@ -42,6 +47,7 @@
         <ion-button fill="outline" expand="block" [routerLink]="'/view/'+note.id" color="secondary">View</ion-button>
       </ion-card-content>
     </ion-card>
+    </ion-list>
 
 
 

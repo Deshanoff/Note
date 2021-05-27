@@ -10,9 +10,9 @@
 </ion-header>
 
 <ion-content>
-  <div class="postcard-container">
-    <div class="postcard">
-      <ion-card>
+
+    <div class="postcard" class="full-height">
+
         <ion-list lines="none">
           <ion-item>
             <ion-input placeholder=" Enter Title" [(ngModel)]="note.title"></ion-input>
@@ -20,7 +20,7 @@
           </ion-item>
           <div style="height: 20px;"></div>
           <ion-item>
-            <textarea #myInput id="myInput" placeholder="Enter More infrmation" rows="20" maxLength="10000" (keyup)="resize()"[(ngModel)]="note.content" lines="none" ></textarea>
+            <textarea #myInput id="myInput" class="textarea" placeholder="Enter More infrmation" rows="20" maxLength="10000" (keyup)="resize()" [(ngModel)]="note.content" lines="none" ></textarea>
 
           </ion-item>
 
@@ -28,7 +28,7 @@
 
 
 
-      </ion-card>
+
 
     </div>
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
@@ -37,6 +37,6 @@
       </ion-fab-button>
     </ion-fab>
 
-</div>
+
 
   </ion-content>

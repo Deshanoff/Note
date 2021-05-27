@@ -15,20 +15,34 @@
 
 
 }
+.textarea {
+  border: none;
+  overflow: auto;
+  outline: none;
+
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+
+  resize: none; /*remove the resize handle on the bottom right*/
+}
 ion-card{
-  height: 90%;
+  height: 100%;
   width: 90%;
 
 }
 #myInput {
   width: 100%;
   border: 0;
+  height:fit-content;
   border-radius: 0;
   background: transparent;
 }
 .postcard {
   text-align: center;
   margin:auto;
+  height:fit-content;
+
 
 
   margin-left: 10%;

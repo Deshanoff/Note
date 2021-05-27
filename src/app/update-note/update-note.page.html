@@ -1,18 +1,19 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      <h2>Take a Note</h2>
+      <h2>Edit Note</h2>
     </ion-title>
 
-    <ion-icon name="power-outline" (click)="signout()" slot="end" style="zoom:2.0;"></ion-icon>
+
+    <ion-button slot="end" (click)="back()">Back</ion-button>
 
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="postcard-container">
-    <div class="postcard">
-      <ion-card>
+
+    <div class="postcard" class="full-height">
+
         <ion-list lines="none">
           <ion-item>
             <ion-input placeholder=" Enter Title" [(ngModel)]="note.title"></ion-input>
@@ -20,7 +21,7 @@
           </ion-item>
           <div style="height: 20px;"></div>
           <ion-item>
-            <textarea #myInput id="myInput" placeholder="Enter More infrmation" rows="10" maxLength="500" (keyup)="resize()"[(ngModel)]="note.content" lines="none" ></textarea>
+            <textarea #myInput id="myInput" class="textarea" placeholder="Enter More infrmation" rows="10" maxLength="500" (keyup)="resize()"[(ngModel)]="note.content" lines="none" ></textarea>
 
           </ion-item>
 
@@ -28,7 +29,7 @@
 
 
 
-      </ion-card>
+
 
     </div>
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
@@ -37,6 +38,6 @@
       </ion-fab-button>
     </ion-fab>
 
-</div>
+
 
   </ion-content>
